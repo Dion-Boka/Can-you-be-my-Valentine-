@@ -40,25 +40,26 @@
         }
 
         .floating-photo {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 15px;
-            opacity: 0.15;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            animation: float-photo 20s infinite ease-in-out;
-        }
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    opacity: 0.25;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    animation: float-photo 20s infinite ease-in-out;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
 
-        @media (max-width: 768px) {
-            .floating-photo {
-                width: 80px;
-                height: 80px;
-                opacity: 0.1;
-            }
-        }
-
+       @media (max-width: 768px) {
+    .floating-photo {
+        width: 100px;
+        height: 100px;
+        opacity: 0.22;
+        border: 2px solid rgba(255, 255, 255, 0.25);
+    }
+}
         /* Add your photos here - replace these placeholder URLs with your actual photo URLs */
         .photo1 {
             background-image: url('https://i.imgur.com/y6iEczz.jpeg');
@@ -503,9 +504,10 @@
             <h1>Hey Rufaro!!! 💜</h1>
             <div class="message">
                 <div class="emoji">🌸</div>
-                <p>Took me a while to make this, hope you like the song choice</p>
-                <p> Took me a while to find you, <span class="name-highlight">Lavender</span>, but I finally found you!</p>
-                <p>I made something special just for you... I chose the purple color coz yourname is Lavender n all as well, hope it makes sense</p>
+                <p>Took me a while to make this, hope you like the song though and colour choice</p>
+                <p> Took me a while to find the right words, <span class="name-highlight">Lavender</span>, but I think this should suffice!</p>
+                <p>So... Valentine's Day is coming up, and I wanted to do something</p>
+                <p>💕Something that shows how much you mean to me.💕Something genuine, intention and shows ndambogarawo pasi kuisa time kaa💕</p>
                 <p>Click below when you're ready 💕</p>
                 <button class="start-btn" onclick="nextScreen(2)">I'm Ready!</button>
             </div>
@@ -513,10 +515,12 @@
 
         <!-- Screen 2: Sweet message -->
         <div class="screen" id="screen2">
-            <h1>You Know... 💭</h1>
+            <h1>Soo here's the thing, You Know... 💭</h1>
             <div class="message">
                 <div class="emoji">✨</div>
+                <p>From the moment we met, you've been changing my world in the best ways.</p>
                 <p>Every day with you even though limited feels like a blessing.</p>
+                <p><span class="name-highlight">The adventures, the experiences, the time, the love</span>.</p>
                 <p>It always hurts when we have to say goodbye.</p>
                 <p>That big bright smile of yours lights up my world, <span class="name-highlight">Lavender</span>.</p>
                 <p>You make everything better just by being you, the vibe, the energy and craziness kkk.</p>
@@ -533,10 +537,10 @@
                 <p>Your laughter is my favorite sound.</p>
                 <p>The jokes and every little gesture you make, unomaziva ... to die for</p>
                 <p>Your kisses are my favorite touch.</p>
-                <p>And your presence makes everything feel right.</p>
+                <p>And your presence just makes everything feel right.</p>
                 <p>I'm not really good with words zvaunoziva but even they couldn't be enough to express how much I love you</p>
-                <p><span class="name-highlight">Lavender my Love</span>, you truly are incredible.</p>
-                <button class="start-btn" onclick="nextScreen(4)">You're making me blush... 😊</button>
+                <p><span class="name-highlight">Babe </span>, you truly are incredible.</p>
+                <button class="start-btn" onclick="nextScreen(4)">Click here if I'm making you blush... 😊</button>
             </div>
         </div>
 
@@ -545,21 +549,23 @@
             <h1>But First... 🎮</h1>
             <div class="message">
                 <div class="emoji">🎯</div>
+                <p>I know I'm being all sentimental right now...</p>
+                <p>But before I ask you something important, let's have a little fun.</p>
                 <p>I know you love a good challenge!</p>
                 <p>And I know you love to play games!</p>
-                <p> Especially that blok oone you always play, so i came up with a little something special</p>
-                <p>For you, <span class="name-highlight">Lavender</span> Hope you like it!</p>
+                <p> Especially that blockbuster one you always play, so I came up with a little something special</p>
+                <p> <span class="name-highlight">For you, ... </span> Hope you like it!</p>
                 <p>Let's play a quick memory game.</p>
-                <p>Match all the memories to continue! 💕</p>
+                <p>Match all the pairs to unlock what comes next!</p>
                 <button class="start-btn" onclick="nextScreen(5)">Let's Play!</button>
             </div>
         </div>
 
         <!-- Screen 5: Memory Game -->
         <div class="screen" id="screen5">
-            <h1>Memory Game! 🧠</h1>
+            <h1>Our Memories! 🧠</h1>
             <div class="message">
-                <p>Match all the pairs!</p>
+                <p>Match the pairs of our favorite moments together!!!</p>
                 <div class="game-board" id="gameBoard"></div>
                 <p id="gameStatus" style="margin-top: 20px; font-weight: bold; color: #9b59b6;"></p>
             </div>
@@ -567,12 +573,12 @@
 
         <!-- Screen 6: Build up to question -->
         <div class="screen" id="screen6">
-            <h1>So... 💭</h1>
+            <h1>So here's what I've been thinking... 💭 💭</h1>
             <div class="message">
                 <div class="emoji">🌹</div>
-                <p>Valentine's Day is coming up...</p>
-                <p>And I've been thinking about something... after you told me obviously, hahaha</p>
-                <p>Something important...</p>
+                <p>Valentine's Day is just around the corner ... </p>
+                <p> ... And I can't imagine spending it with anyone else</p>
+                <p>Actually, there's something I need to ask you...</p>
                 <button class="start-btn" onclick="nextScreen(7)">What is it?</button>
             </div>
         </div>
@@ -597,7 +603,7 @@
             <div class="message">
                 <div class="emoji">🥳</div>
                 <p style="font-size: 1.4em;">Got you, I knew you was gonna say yes!</p>
-                <p>This Valentine's Day is going to be absolutely perfect! 💖</p>
+                <p>This Valentine's is going to be absolutely perfect! 💖</p>
                 <p style="font-size: 3em; margin: 20px 0;">🎊💝🎊</p>
                 <div class="loading-redirect">
                     <p>Sending you back to WhatsApp in...</p>
@@ -761,7 +767,7 @@
         }
 
         function redirectToWhatsApp() {
-            const message = encodeURIComponent("Yes! I'll be your Valentine! 💕 You made my day with that website! 🥰");
+            const message = encodeURIComponent("Yes! I'll be your Valentine Babe! 💕 🥰");
             const whatsappURL = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${message}`;
             window.location.href = whatsappURL;
         }
