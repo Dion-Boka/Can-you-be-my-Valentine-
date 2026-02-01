@@ -920,7 +920,7 @@
                 allowfullscreen>
             </iframe>
         </div>
-        <p style="margin-top: 20px; font-size: 1em; color: #666;">Take your time, watch when you're ready 💜</p>
+        <p style="margin-top: 20px; font-size: 1em; color: #666;">A glimpse back in time 💜</p>
         <button class="start-btn" onclick="nextScreen(4)">Continue</button>
     </div>
 </div>
@@ -960,9 +960,37 @@
                 <p>Valentine's Day is just around the corner ... </p>
                 <p> ... And I can't imagine spending it with anyone else</p>
                 <p>Actually, there's something I need to ask you...</p>
-                <button class="start-btn" onclick="nextScreen(7)">What is it?</button>
+                <button class="start-btn" onclick="nextScreen(6.5)">What is it?</button>
             </div>
         </div>
+
+        <!-- Screen 6.5: Video Message -->
+<div class="screen" id="screen6_5">
+    <h1>Don't mind the rough look ... 🎬</h1>
+    <div class="message video-message">
+        <div class="video-container">
+            <iframe 
+                src="https://drive.google.com/file/d/1BaNNgppxDrlY0FwcPvSeuDnrWj4fOzoq/preview" 
+                frameborder="0" 
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
+        <p style="margin-top: 20px; font-size: 1em; color: #666;">Take your time love, watch when you're ready 💜</p>
+        <script>
+function resumeMusicAndContinue() {
+    if (!musicPlaying) {
+        bgMusic.play().then(() => {
+            musicPlaying = true;
+            document.getElementById('musicToggle').textContent = '🎵';
+        }).catch(e => console.log('Resume music error:', e));
+    }
+    nextScreen(4);
+}
+        </script>
+        <button class="start-btn" onclick="resumeMusicAndContinue()">Hold onto that answer for me please... </button>
+    </div>
+</div>
 
         <!-- Screen 7: The Question -->
         <div class="screen" id="screen7">
@@ -1181,6 +1209,14 @@ function continueWithCurrentSong() {
         
         // Highlight the photos during the transition
         photos.forEach(photo => photo.classList.add('highlight'));
+
+        // Pause music if going to video screen
+if (screenNumber === 6.5 || screenNumber === '6.5') {
+    if (musicPlaying) {
+        bgMusic.pause();
+        document.getElementById('musicToggle').textContent = '🔇';
+    }
+}
         
         // Show the next screen after photo moment
         setTimeout(() => {
