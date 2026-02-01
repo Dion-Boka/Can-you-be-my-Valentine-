@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>For Lavender 💜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            padding: 10px;
+        }
+
+        /* Floating photos background */
+        .photo-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-photo {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            opacity: 0.15;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: float-photo 20s infinite ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .floating-photo {
+                width: 80px;
+                height: 80px;
+                opacity: 0.1;
+            }
+        }
+
+        /* Add your photos here - replace these placeholder URLs with your actual photo URLs */
+        .photo1 {
+            background-image: url('https://i.imgur.com/y6iEczz.jpeg');
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .photo2 {
+            background-image: url('https://i.imgur.com/WvoEUYo.jpeg');
+            top: 60%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+
+        .photo3 {
+            background-image: url('https://i.imgur.com/C1XNVn6.jpeg');
+            top: 80%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        .photo4 {
+            background-image: url('https://i.imgur.com/fcS2mqY.jpeg');
+            top: 20%;
+            left: 70%;
+            animation-delay: 9s;
+        }
+
+        .photo5 {
+            background-image: url('https://i.imgur.com/1hXCkdv.jpeg');
+            top: 50%;
+            left: 5%;
+            animation-delay: 12s;
+        }
+
+        @keyframes float-photo {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-25px) rotate(3deg);
+            }
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                max-width: 100%;
+            }
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .message {
+                padding: 25px 20px;
+                margin: 10px 0;
+            }
+        }
+
+        .message p {
+            font-size: 1.3em;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .message p {
+                font-size: 1.1em;
+                margin-bottom: 15px;
+            }
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 15px 40px;
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            touch-action: manipulation;
+        }
+
+        @media (max-width: 768px) {
+            button {
+                font-size: 1em;
+                padding: 12px 30px;
+                margin: 8px;
+            }
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .yes-btn:hover, .yes-btn:active {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .no-btn {
+            background: #e0e0e0;
+            color: #666;
+            position: relative;
+        }
+
+        .no-btn:hover, .no-btn:active {
+            background: #d0d0d0;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            color: white;
+            font-size: 1.5em;
+            padding: 20px 50px;
+        }
+
+        @media (max-width: 768px) {
+            .start-btn {
+                font-size: 1.2em;
+                padding: 15px 35px;
+            }
+        }
+
+        .start-btn:hover, .start-btn:active {
+            transform: scale(1.05);
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 2em;
+            color: #ff69b4;
+            pointer-events: none;
+            animation: float 3s ease-in forwards;
+            z-index: 1000;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .emoji {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: bounce 1s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .emoji {
+                font-size: 3em;
+                margin: 15px 0;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            animation: confetti-fall 3s ease-in forwards;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .button-container {
+            position: relative;
+            min-height: 80px;
+            margin-top: 30px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Memory Game Styles */
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 90px);
+            gap: 10px;
+            justify-content: center;
+            margin: 30px auto;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .game-board {
+                grid-template-columns: repeat(4, 70px);
+                gap: 8px;
+                margin: 20px auto;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .game-board {
+                grid-template-columns: repeat(4, 60px);
+                gap: 6px;
+            }
+        }
+
+        .card {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+            touch-action: manipulation;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: 70px;
+                height: 70px;
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+        }
+
+        .card:active {
+            transform: scale(0.95);
+        }
+
+        .card.flipped {
+            background: white;
+        }
+
+        .card.matched {
+            background: #90EE90;
+            cursor: default;
+            opacity: 0.8;
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .music-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.4em;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        @media (max-width: 768px) {
+            .music-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2em;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        .music-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .name-highlight {
+            color: #9b59b6;
+            font-weight: bold;
+        }
+
+        .loading-redirect {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .countdown {
+            font-size: 2em;
+            color: #f5576c;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating photos background -->
+    <div class="photo-background">
+        <div class="floating-photo photo1"></div>
+        <div class="floating-photo photo2"></div>
+        <div class="floating-photo photo3"></div>
+        <div class="floating-photo photo4"></div>
+        <div class="floating-photo photo5"></div>
+    </div>
+
+    <!-- Music toggle button -->
+    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">🎵</button>
+
+    <!-- Background music -->
+    <audio id="bgMusic" loop>
+        <!-- Replace with your chosen song URL -->
+        <source src="https://files.catbox.moe/2dxgp8.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- Screen 1: Introduction -->
+        <div class="screen active" id="screen1">
+            <h1>Hey Rufaro!!! 💜</h1>
+            <div class="message">
+                <div class="emoji">🌸</div>
+                <p>Took me a while to make this, hope you like the song choice</p>
+                <p> Took me a while to find you, <span class="name-highlight">Lavender</span>, but I finally found you!</p>
+                <p>I made something special just for you... I chose the purple color coz yourname is Lavender n all as well, hope it makes sense</p>
+                <p>Click below when you're ready 💕</p>
+                <button class="start-btn" onclick="nextScreen(2)">I'm Ready!</button>
+            </div>
+        </div>
+
+        <!-- Screen 2: Sweet message -->
+        <div class="screen" id="screen2">
+            <h1>You Know... 💭</h1>
+            <div class="message">
+                <div class="emoji">✨</div>
+                <p>Every day with you even though limited feels like a blessing.</p>
+                <p>It always hurts when we have to say goodbye.</p>
+                <p>That big bright smile of yours lights up my world, <span class="name-highlight">Lavender</span>.</p>
+                <p>You make everything better just by being you, the vibe, the energy and craziness kkk.</p>
+                <button class="start-btn" onclick="nextScreen(3)">Continue...</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: More appreciation -->
+        <div class="screen" id="screen3">
+            <h1>Honestly... 🌟</h1>
+            <div class="message">
+                <div class="emoji">💖</div>
+                <p>I'm so grateful for every moment we share.</p>
+                <p>Your laughter is my favorite sound.</p>
+                <p>The jokes and every little gesture you make, unomaziva ... to die for</p>
+                <p>Your kisses are my favorite touch.</p>
+                <p>And your presence makes everything feel right.</p>
+                <p>I'm not really good with words zvaunoziva but even they couldn't be enough to express how much I love you</p>
+                <p><span class="name-highlight">Lavender my Love</span>, you truly are incredible.</p>
+                <button class="start-btn" onclick="nextScreen(4)">You're making me blush... 😊</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Game intro -->
+        <div class="screen" id="screen4">
+            <h1>But First... 🎮</h1>
+            <div class="message">
+                <div class="emoji">🎯</div>
+                <p>I know you love a good challenge!</p>
+                <p>And I know you love to play games!</p>
+                <p> Especially that blok oone you always play, so i came up with a little something special</p>
+                <p>For you, <span class="name-highlight">Lavender</span> Hope you like it!</p>
+                <p>Let's play a quick memory game.</p>
+                <p>Match all the memories to continue! 💕</p>
+                <button class="start-btn" onclick="nextScreen(5)">Let's Play!</button>
+            </div>
+        </div>
+
+        <!-- Screen 5: Memory Game -->
+        <div class="screen" id="screen5">
+            <h1>Memory Game! 🧠</h1>
+            <div class="message">
+                <p>Match all the pairs!</p>
+                <div class="game-board" id="gameBoard"></div>
+                <p id="gameStatus" style="margin-top: 20px; font-weight: bold; color: #9b59b6;"></p>
+            </div>
+        </div>
+
+        <!-- Screen 6: Build up to question -->
+        <div class="screen" id="screen6">
+            <h1>So... 💭</h1>
+            <div class="message">
+                <div class="emoji">🌹</div>
+                <p>Valentine's Day is coming up...</p>
+                <p>And I've been thinking about something... after you told me obviously, hahaha</p>
+                <p>Something important...</p>
+                <button class="start-btn" onclick="nextScreen(7)">What is it?</button>
+            </div>
+        </div>
+
+        <!-- Screen 7: The Question -->
+        <div class="screen" id="screen7">
+            <h1>Rufaro... 💝</h1>
+            <div class="message">
+                <div class="emoji pulse">❤️</div>
+                <p style="font-size: 1.5em; font-weight: bold; color: #9b59b6;">Will you be my Valentine?</p>
+                <p>I promise to keep making you smile, to support your dreams, and to be your biggest fan, and try my best to always love you right (and yes, no is not an answer 😄)</p>
+                <div class="button-container">
+                    <button class="yes-btn" onclick="handleYes()">YES! 💕</button>
+                    <button class="no-btn" id="noBtn" onclick="handleNo()" onmouseover="moveButton()">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 8: Celebration & Redirect -->
+        <div class="screen" id="screen8">
+            <h1>YES!! 🎉</h1>
+            <div class="message">
+                <div class="emoji">🥳</div>
+                <p style="font-size: 1.4em;">Got you, I knew you was gonna say yes!</p>
+                <p>This Valentine's Day is going to be absolutely perfect! 💖</p>
+                <p style="font-size: 3em; margin: 20px 0;">🎊💝🎊</p>
+                <div class="loading-redirect">
+                    <p>Sending you back to WhatsApp in...</p>
+                    <div class="countdown" id="countdown">3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="celebration" id="celebration"></div>
+
+    <script>
+        let noClickCount = 0;
+        let musicPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+
+        // Your WhatsApp number (replace with your actual number in international format without + or spaces)
+        // Example: for +1 234 567 8900, use: 12345678900
+        const YOUR_WHATSAPP_NUMBER = '263713268430';
+
+        const noMessages = [
+            "Are you sure? 🥺",
+            "Really? Think about it! 💕",
+            "The button is escaping! 😄",
+            "You can't catch me! 😆",
+            "Just say yes, Lavender! 💝"
+        ];
+
+        // Memory Game variables - NOW WITH PHOTOS!
+        // Replace these URLs with 8 different photos of you and Lavender
+        const photoURLs = [
+            'https://i.imgur.com/r5qOevv.png',  // Photo 1 - e.g., you two at a restaurant
+            'https://i.imgur.com/waA7Opa.jpeg',  // Photo 2 - e.g., a selfie together
+            'https://i.imgur.com/7qWSAM4.jpeg',  // Photo 3 - e.g., on a date
+            'https://i.imgur.com/3eI2kQX.jpeg',  // Photo 4 - e.g., her portrait
+            'https://i.imgur.com/50fZGkW.jpeg',  // Photo 5 - e.g., you two laughing
+            'https://i.imgur.com/IuMTbN2.jpeg',  // Photo 6 - e.g., outdoor photo
+            'https://i.imgur.com/oOR46FY.jpeg',  // Photo 7 - e.g., special moment
+            'https://i.imgur.com/baPjkYE.jpeg'   // Photo 8 - e.g., recent photo
+        ];
+        
+        let cards = [...photoURLs, ...photoURLs]; // Duplicate for matching pairs
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function toggleMusic() {
+            const musicToggle = document.getElementById('musicToggle');
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicToggle.textContent = '🔇';
+                musicPlaying = false;
+            } else {
+                bgMusic.play();
+                musicToggle.textContent = '🎵';
+                musicPlaying = true;
+            }
+        }
+
+        // Auto-play music on first interaction
+        document.body.addEventListener('click', function() {
+            if (!musicPlaying) {
+                bgMusic.play().catch(e => console.log('Music autoplay prevented'));
+                musicPlaying = true;
+            }
+        }, { once: true });
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initGame() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.innerHTML = '';
+            cards = shuffle([...photoURLs, ...photoURLs]);
+            matchedPairs = 0;
+            flippedCards = [];
+            
+            cards.forEach((photoURL, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.photo = photoURL;
+                card.dataset.index = index;
+                card.innerHTML = '<div class="card-front">💜</div>';
+                card.onclick = () => flipCard(card);
+                gameBoard.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length < 2 && !card.classList.contains('flipped') && !card.classList.contains('matched')) {
+                card.classList.add('flipped');
+                card.innerHTML = '<img src="' + card.dataset.photo + '" class="card-photo" alt="Memory">';
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.dataset.photo === card2.dataset.photo) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                
+                if (matchedPairs === photoURLs.length) {
+                    document.getElementById('gameStatus').textContent = '🎉 Perfect! You matched all our memories! 🎉';
+                    createHearts(15);
+                    setTimeout(() => nextScreen(6), 2000);
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                card1.innerHTML = '<div class="card-front">💜</div>';
+                card2.innerHTML = '<div class="card-front">💜</div>';
+            }
+            
+            flippedCards = [];
+        }
+
+        function nextScreen(screenNumber) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById('screen' + screenNumber).classList.add('active');
+            
+            if (screenNumber === 5) {
+                initGame();
+            }
+            
+            createHearts(5);
+        }
+
+        function handleYes() {
+            nextScreen(8);
+            celebrate();
+            createHearts(50);
+            startCountdown();
+        }
+
+        function startCountdown() {
+            let count = 3;
+            const countdownEl = document.getElementById('countdown');
+            
+            const interval = setInterval(() => {
+                count--;
+                countdownEl.textContent = count;
+                
+                if (count === 0) {
+                    clearInterval(interval);
+                    redirectToWhatsApp();
+                }
+            }, 1000);
+        }
+
+        function redirectToWhatsApp() {
+            const message = encodeURIComponent("Yes! I'll be your Valentine! 💕 You made my day with that website! 🥰");
+            const whatsappURL = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${message}`;
+            window.location.href = whatsappURL;
+        }
+
+        function handleNo() {
+            const noBtn = document.getElementById('noBtn');
+            noClickCount++;
+            
+            if (noClickCount < noMessages.length) {
+                noBtn.textContent = noMessages[noClickCount];
+            }
+            
+            createHearts(3);
+        }
+
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const container = noBtn.parentElement;
+            
+            if (noClickCount >= 2) {
+                const containerRect = container.getBoundingClientRect();
+                const btnRect = noBtn.getBoundingClientRect();
+                
+                const maxX = containerRect.width - btnRect.width - 40;
+                const maxY = containerRect.height - btnRect.height - 20;
+                
+                const randomX = Math.max(0, Math.random() * maxX);
+                const randomY = Math.max(0, Math.random() * maxY);
+                
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+                noBtn.style.transition = 'all 0.3s ease';
+            }
+        }
+
+        // Mobile touch support for "No" button
+        if ('ontouchstart' in window) {
+            document.addEventListener('DOMContentLoaded', function() {
+                const noBtnCheck = setInterval(() => {
+                    const noBtn = document.getElementById('noBtn');
+                    if (noBtn) {
+                        noBtn.addEventListener('touchstart', function(e) {
+                            if (noClickCount >= 2) {
+                                e.preventDefault();
+                                moveButton();
+                            }
+                        });
+                        clearInterval(noBtnCheck);
+                    }
+                }, 100);
+            });
+        }
+
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = ['💖', '💕', '💜', '💝'][Math.floor(Math.random() * 4)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function celebrate() {
+            const celebration = document.getElementById('celebration');
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#a18cd1', '#9b59b6'];
+            
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = -10 + 'px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    celebration.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3500);
+                }, i * 30);
+            }
+        }
+
+        // Create ambient hearts occasionally
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                createHearts(1);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
