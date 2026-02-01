@@ -985,10 +985,14 @@ function resumeMusicAndContinue() {
             document.getElementById('musicToggle').textContent = '🎵';
         }).catch(e => console.log('Resume music error:', e));
     }
-    nextScreen(4);
+    nextScreen(7);
 }
         </script>
-        <button class="start-btn" onclick="resumeMusicAndContinue()">Hold onto that answer for me please... </button>
+        <button class="start-btn"
+        onclick="resumeMusicAndContinue(); nextScreen(7);">
+    Hold onto that answer for me please...
+</button>
+
     </div>
 </div>
 
