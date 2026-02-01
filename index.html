@@ -6,6 +6,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>For Lavender 💜</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,16 +18,16 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            overflow-y: auto;
-            position: relative;
-            padding: 10px;
+            font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    padding: 10px;
         }
 
         /* Floating photos background */
@@ -209,11 +212,12 @@
 }
 
         h1 {
-            color: white;
-            font-size: 3em;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+    font-family: 'Pinyon Script', cursive;
+    color: white;
+    font-size: 3.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
 
         @media (max-width: 768px) {
             h1 {
@@ -253,6 +257,8 @@
         }
 
         button {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.2em;
             font-size: 1.2em;
             padding: 15px 40px;
             margin: 10px;
@@ -538,6 +544,135 @@
             margin: 20px 0;
             font-weight: bold;
         }
+        /* Music Playlist Styles */
+.music-playlist {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(102, 126, 234, 0.95);
+    backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.5s ease;
+}
+
+.music-playlist.active {
+    display: flex;
+}
+
+.playlist-content {
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+    .playlist-content {
+        padding: 30px 20px;
+        max-width: 95%;
+    }
+}
+
+.playlist-content h3 {
+    color: #9b59b6;
+    margin-bottom: 10px;
+}
+
+.song-list {
+    margin: 20px 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.song-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(161, 140, 209, 0.3);
+}
+
+.song-btn:hover, .song-btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(161, 140, 209, 0.5);
+}
+
+@media (max-width: 768px) {
+    .song-btn {
+        padding: 12px;
+        font-size: 1em;
+    }
+}
+
+.skip-music-btn {
+    margin-top: 20px;
+    background: transparent;
+    color: #999;
+    border: none;
+    font-size: 0.95em;
+    cursor: pointer;
+    padding: 10px;
+    font-family: 'Quicksand', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.skip-music-btn:hover, .skip-music-btn:active {
+    color: #666;
+    text-decoration: underline;
+}
+        /* Video Screen Styles */
+.video-message {
+    padding: 30px !important;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    background: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .video-message {
+        padding: 20px !important;
+    }
+    
+    .video-container {
+        border-radius: 10px;
+    }
+}
     </style>
 </head>
 <body>
@@ -561,9 +696,38 @@
 
     <!-- Background music -->
     <audio id="bgMusic" loop>
-        <!-- Replace with your chosen song URL -->
-        <source src="https://files.catbox.moe/2dxgp8.mp3" type="audio/mpeg">
-    </audio>
+    <source id="musicSource" src="https://files.catbox.moe/2dxgp8.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Music Playlist Selector -->
+<div class="music-playlist" id="musicPlaylist">
+    <div class="playlist-content">
+        <h3 style="font-family: 'Pinyon Script', cursive; font-size: 2.5em; margin-bottom: 5px;">I picked a playlist for you🎵</h3>
+        <p style="font-size: 0.9em; color: #666; margin-bottom: 20px;">Pick the one that warms your heart</p>
+        <div class="song-list">
+            <button class="song-btn" onclick="selectSong('https://files.catbox.moe/q8cub6.mp3', 'Your Song')">
+                💜 Your Song
+            </button>
+            <button class="song-btn" onclick="selectSong('https://files.catbox.moe/xrsqcg.mp3', 'Eternal Melody')">
+                💕 Eternal Melody
+            </button>
+            <button class="song-btn" onclick="selectSong('https://files.catbox.moe/4ruc6r.mp3', 'Heartbeat Serenade')">
+                💝 How I feel
+            </button>
+            <button class="song-btn" onclick="selectSong('https://files.catbox.moe/g4g1ha.mp3', 'Love\'s Whisper')">
+                ✨ Gooofyy
+            </button>
+            <button class="song-btn" onclick="selectSong('https://files.catbox.moe/fwaf27.mp3', 'Sweet Symphony')">
+                🌹 Sweet Symphony - Stay with me
+            </button>
+            <button class="song-btn" onclick="selectSong('https://files.catbox.moe/x1ms7c.mp3', 'Forever Yours')">
+                💖 Forever Yours
+            </button>
+        </div>
+        <p style="font-size: 0.85em; color: #999; margin-top: 15px;">Currently playing: <span id="currentSongName">Our Song</span></p>
+        <button class="skip-music-btn" onclick="continueWithCurrentSong()">Continue with Current Song</button>
+    </div>
+</div>
 
     <div class="container">
         <!-- Screen 1: Introduction -->
@@ -608,9 +772,26 @@
                 <p>And your presence just makes everything feel right.</p>
                 <p>I'm not really good with words zvaunoziva but even they couldn't be enough to express how much I love you</p>
                 <p><span class="name-highlight">Babe </span>, you truly are incredible.</p>
-                <button class="start-btn" onclick="nextScreen(4)">Click here if I'm making you blush... 😊</button>
+                <button class="start-btn" onclick="nextScreen(3.5)">Click here if I'm making you blush... 😊</button>
             </div>
         </div>
+
+        <!-- Screen 3.5: Video Message -->
+<div class="screen" id="screen3_5">
+    <h1>I also thought i could sneak this for you... 🎬</h1>
+    <div class="message video-message">
+        <div class="video-container">
+            <iframe 
+                src="https://drive.google.com/file/d/1qJT-2TgWQK5jDgKzsU1ZinDWnvUN-PKd/preview" 
+                frameborder="0" 
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
+        <p style="margin-top: 20px; font-size: 1em; color: #666;">Take your time, watch when you're ready 💜</p>
+        <button class="start-btn" onclick="nextScreen(4)">Continue</button>
+    </div>
+</div>
 
         <!-- Screen 4: Game intro -->
         <div class="screen" id="screen4">
@@ -685,20 +866,60 @@
 
     <script>
         let noClickCount = 0;
-        let musicPlaying = false;
-        const bgMusic = document.getElementById('bgMusic');
+let musicPlaying = false;
+const bgMusic = document.getElementById('bgMusic');
+let currentSong = 'Your Song'; // Default song name
 
-        // Your WhatsApp number (replace with your actual number in international format without + or spaces)
-        // Example: for +1 234 567 8900, use: 12345678900
-        const YOUR_WHATSAPP_NUMBER = '263713268430';
+// Your WhatsApp number
+const YOUR_WHATSAPP_NUMBER = 'YOUR_PHONE_NUMBER_HERE';
 
-        const noMessages = [
-            "Are you sure? 🥺",
-            "Really? Think about it! 💕",
-            "The button is escaping! 😄",
-            "You can't catch me! 😆",
-            "Just say yes, Lavender! 💝"
-        ];
+const noMessages = [
+    "Wait, are you sure? 🥺",
+    "Come on, give me a chance! 💜",
+    "The button's running away now! 😆",
+    "You really can't catch it! 😏",
+    "Just say yes, Lavender! 💕"
+];
+
+// Auto-play default song and show playlist after 1 second
+window.addEventListener('load', function() {
+    // Start default song
+    bgMusic.play().then(() => {
+        musicPlaying = true;
+        document.getElementById('musicToggle').textContent = '🎵';
+    }).catch(e => {
+        console.log('Autoplay blocked, user will need to interact');
+    });
+    
+    // Show playlist after 1 second
+    setTimeout(() => {
+        document.getElementById('musicPlaylist').classList.add('active');
+    }, 1000);
+});
+
+function selectSong(songUrl, songName) {
+    currentSong = songName;
+    const musicSource = document.getElementById('musicSource');
+    musicSource.src = songUrl;
+    bgMusic.load();
+    bgMusic.play().then(() => {
+        musicPlaying = true;
+        document.getElementById('musicToggle').textContent = '🎵';
+        document.getElementById('currentSongName').textContent = songName;
+    }).catch(e => console.log('Music error:', e));
+    
+    document.getElementById('musicPlaylist').classList.remove('active');
+}
+
+function continueWithCurrentSong() {
+    if (!musicPlaying) {
+        bgMusic.play().then(() => {
+            musicPlaying = true;
+            document.getElementById('musicToggle').textContent = '🎵';
+        }).catch(e => console.log('Music error:', e));
+    }
+    document.getElementById('musicPlaylist').classList.remove('active');
+}
 
         // Memory Game variables - NOW WITH PHOTOS!
         // Replace these URLs with 8 different photos of you and Lavender
@@ -822,7 +1043,7 @@
             photos.forEach(photo => photo.classList.remove('highlight'));
             
             // Show next screen
-            document.getElementById('screen' + screenNumber).classList.add('active');
+           document.getElementById('screen' + screenNumber.toString().replace('.', '_')).classList.add('active');
             
             // Initialize game if needed
             if (screenNumber === 5) {
