@@ -50,6 +50,12 @@
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
     animation: float-photo 20s infinite ease-in-out;
     border: 3px solid rgba(255, 255, 255, 0.3);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.floating-photo.highlight {
+    opacity: 0.6;
+    transform: scale(1.1);
 }
 
        @media (max-width: 768px) {
@@ -146,6 +152,20 @@
                 transform: translateY(0);
             }
         }
+        @keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
 
         h1 {
             color: white;
@@ -504,10 +524,11 @@
             <h1>Hey Rufaro!!! 💜</h1>
             <div class="message">
                 <div class="emoji">🌸</div>
+                <p>There's a little music icon by the corner, click there</p>
                 <p>Took me a while to make this, hope you like the song though and colour choice</p>
                 <p> Took me a while to find the right words, <span class="name-highlight">Lavender</span>, but I think this should suffice!</p>
                 <p>So... Valentine's Day is coming up, and I wanted to do something</p>
-                <p>💕Something that shows how much you mean to me.💕Something genuine, intention and shows ndambogarawo pasi kuisa time kaa💕</p>
+                <p>💕Something that shows how much you mean to me.💕Something genuine, intentional and shows ndambogarawo pasi kuisa time kaa💕</p>
                 <p>Click below when you're ready 💕</p>
                 <button class="start-btn" onclick="nextScreen(2)">I'm Ready!</button>
             </div>
@@ -732,17 +753,38 @@
         }
 
         function nextScreen(screenNumber) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
+    const currentScreen = document.querySelector('.screen.active');
+    const messageBox = currentScreen.querySelector('.message');
+    const photos = document.querySelectorAll('.floating-photo');
+    
+    // Fade out the message box first
+    messageBox.classList.add('fade-out');
+    
+    // Wait for fade out, then highlight photos
+    setTimeout(() => {
+        currentScreen.classList.remove('active');
+        
+        // Highlight the photos during the transition
+        photos.forEach(photo => photo.classList.add('highlight'));
+        
+        // Show the next screen after photo moment
+        setTimeout(() => {
+            // Remove highlights
+            photos.forEach(photo => photo.classList.remove('highlight'));
+            
+            // Show next screen
             document.getElementById('screen' + screenNumber).classList.add('active');
             
+            // Initialize game if needed
             if (screenNumber === 5) {
                 initGame();
             }
             
             createHearts(5);
-        }
+        }, 2500); // 2.5 seconds to see the photos
+        
+    }, 500); // Wait for fade-out animation
+}
 
         function handleYes() {
             nextScreen(8);
